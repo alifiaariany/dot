@@ -1,0 +1,63 @@
+QUIZ - DOT
+
+1) Buat RDBMS skema seperti berikut 
+- id
+- title
+- harga 
+Jawab :
+Langkah - langkahnya yaitu :
+- pertama buka terlebih dahulu navicat
+- lalu buat koneksi baru dengan cara new connection > mysql > masukan connection name "quiz1" > host 127.0.0.1 > port 33366 > user root > password p455w0rd.
+- kemudian lakukan test connection setelah itu tekan ok
+- klik 2x koneksi quiz1 sampai berubah warna hijau
+- klik kanan koneksi quiz1 lalu pilih new database
+- masukkan database name "quiz1" lalu tekan ok
+- klik kanan queries lalu pilih new queries
+- masukkan 
+CREATE TABLE `product_table` (
+	`id` INT,
+	`title` VARCHAR(255),
+	`harga` INT,
+	PRIMARY KEY (`id`)
+);
+pada kolom query
+- lalu tekan run.
+
+2) Buat Mongodb skema seperti berikut 
+- _id
+- category
+Jawab : 
+Langkah - langkahnya yaitu :
+- pertama buka terminal terlebih dahulu
+- ketik docker exec -it mongo mongosh --username root --password p455w0rd
+- ketik use category
+- ketik db.createCollection("barang")
+db.barang.insert([{"id": "1", "title": "Doll", "harga": "2000000"}, 
+{"id": "2", "title": "HP", "harga": "1000000"}, 
+{"id": "3", "title": "Acer", "harga": "2500000"}, 
+{"id": "4", "title": "Lenovo", "harga": "500000"}])
+- ketik db.barang.find()
+- ketik db.barang.find({"harga": {$gt: "2000000"}})
+- ketik db.barang.update({"_id" : ObjectId("6390473d4a5ea9c46b9b2baf")}, {$set: {"title" : "Axioo"}})
+
+3) Koneksikan RDBMS ke aplikasi 
+Jawab :
+- pertama buka terminal dengan root sebagai current folder
+- ketik cd /pert4
+- ketik docker-exec -it lumen_php bash
+- ketik composer install
+- ketik cd src
+- ketik composer create-project --prefer-dist laravel/lumen
+- ketik cd .env
+- masukan ip vEthernet sebagai host > database name > username > password > port 
+- buat controller
+- ketik php artisan make:controller UserController
+- buat model
+- ketik php artisan make:model UserModel
+- ketik locate models
+- buat model user sesuai dengan skema database pertama
+- ketiklocate routes/web.php
+- buat routes / endpoint yang mengarahkan ke UserController dengan metode http get dan post
+-ketik locate http/controllers/UserController
+- buat function CRUD
+- buka postman lalu masukan url berformat [ip vEthernet wsl:port]/[endpoint]
